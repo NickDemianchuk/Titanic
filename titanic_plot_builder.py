@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Reading csv data set and assigning it to the object
+# Reading csv data
 df = pd.read_csv("data/train.csv")
 
 # Plot dimensions

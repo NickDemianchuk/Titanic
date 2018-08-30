@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Reading csv data set and assigning it to the object
+# Reading csv data set
 df = pd.read_csv("data/train.csv")
 
 # Survival rates
@@ -35,13 +35,13 @@ def survivalPredict(passenger):
 
     # Storing binary value in the new column Predicted
     # 1 - if survival rate is greater or equal than 0.5, otherwise - 0
-    passenger['Predicted'] = int(survival_rate >= 0.5)
+    passenger['Result'] = int(survival_rate >= 0.5)
     return passenger
 
 def compareValues(passenger):
     # Creating the new column Result with binary values
     # 1 - if survival predicted correctly, otherwise - 0
-    passenger['Result'] = int(passenger['Survived'] == passenger['Predicted'])
+    passenger['Predicted'] = int(passenger['Survived'] == passenger['Result'])
     return passenger
 
 # Applying function for predicting survival for each row in the data set
@@ -51,6 +51,6 @@ df = df.apply(survivalPredict, axis=1)
 df = df.apply(compareValues, axis=1)
 
 # Accuracy percentage is defined by the average value of the Result column
-accuracy_rate = df['Result'].mean() * 100
+acc_pr = df['Predicted'].mean() * 100
 
-print('The accuracy rate of the prediction is ' + str(round(accuracy_rate, 2)) + '%')
+print('The accuracy of the prediction is ' + str(round(acc_pr, 2)) + '%')
